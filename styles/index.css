@@ -3,7 +3,7 @@
     --secondary-bg-color: #EDEDE8;
     --primary: #D0A28A;
     --secondary: #D6AF99;
-    
+    --secondary-muted: rgba(214, 175, 153, 0.6);
     /* https://coolors.co/d0a28a-d6af99-fff1e6-f0efeb-eeddd3-edede8 */
 }
 
@@ -21,6 +21,20 @@ p {
 
 span {
     color: var(--secondary);
+}
+
+#search {
+    color: var(--primary);
+}
+
+#search::placeholder {
+    color: var(--secondary);
+}
+
+#search:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px var(--secondary-muted);
+
 }
 
 #submit {

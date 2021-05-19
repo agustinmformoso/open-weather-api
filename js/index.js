@@ -98,6 +98,11 @@ const printValues = (data) => {
 }
 
 inputElement.addEventListener('change', (e) => city = e.target.value)
+inputElement.addEventListener('keyup', (e) => {
+    
+    e.key === 'Enter' && getWeather(city, units)
+
+})
 
 searchButton.addEventListener('click', () => {
     getWeather(city, units)
