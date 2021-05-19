@@ -51,15 +51,20 @@ const printValues = (data) => {
 
     let { clouds, main, name, weather, wind } = data
     let { all } = clouds
-    let { feels_like, humidity, temp } = main
+    let { feels_like, humidity, pressure, temp, temp_max, temp_min } = main
     let { description, icon } = weather[0]
     let { speed } = wind
 
     let iconElement = document.getElementById('icon')
     let temperatureElement = document.getElementById('temperature')
+    let feelsLikeElement = document.getElementById('feels_like')
     let humidityElement = document.getElementById('humidity')
     let cloudinessElement = document.getElementById('cloudiness')
     let windElement = document.getElementById('wind')
+
+    let minTempElement = document.getElementById('min_temp')
+    let maxTempElement = document.getElementById('max_temp')
+    let pressureElement = document.getElementById('pressure')
 
     let cityElement = document.getElementById('city')
     let timeElement = document.getElementById('time')
@@ -68,16 +73,20 @@ const printValues = (data) => {
     iconElement.src = `http://openweathermap.org/img/wn/${icon}@2x.png`
     iconElement.alt = description
 
+    temperatureElement.innerHTML = `${temp}°`
+    feelsLikeElement.innerHTML = `RF: ${feels_like}°`
+
     humidityElement.innerHTML = `Humidity: ${humidity} %`
     cloudinessElement.innerHTML = `Cloudiness: ${all} %`
     windElement.innerHTML = `Wind Speed: ${speed} m/s`
 
+    minTempElement.innerHTML = `Min. Temp: ${temp_min} %`
+    maxTempElement.innerHTML = `Max. Temp: ${temp_max} %`
+    pressureElement.innerHTML = `Pressure: ${pressure} m/s`
 
     cityElement.innerHTML = name
     timeElement.innerHTML = getActualDate()
     weatherElement.innerHTML = capitalize(description)
-
-    temperatureElement.innerHTML = temp
 }
 
 inputElement.addEventListener('change', (e) => city = e.target.value)
