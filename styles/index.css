@@ -1,0 +1,29 @@
+:root {
+    --main-bg-color: #F0EFEB;
+    --secondary-bg-color: #EDEDE8;
+    --primary: #D0A28A;
+    --secondary: #D6AF99;
+    
+    /* https://coolors.co/d0a28a-d6af99-fff1e6-f0efeb-eeddd3-edede8 */
+}
+
+body {
+    background-color: var(--main-bg-color);
+}
+
+.card {
+    background-color: var(--secondary-bg-color);
+}
+
+p {
+    color: var(--primary);
+}
+
+span {
+    color: var(--secondary);
+}
+
+#submit {
+    background-color: var(--primary);
+    color: var(--secondary-bg-color);
+}
