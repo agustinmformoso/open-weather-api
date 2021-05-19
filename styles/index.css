@@ -19,7 +19,7 @@ p {
     color: var(--primary);
 }
 
-span {
+span, .disabled-unit {
     color: var(--secondary);
 }
 

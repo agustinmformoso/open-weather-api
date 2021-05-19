@@ -2,7 +2,7 @@ import { API_KEY, URL } from './constants.js'
 
 let city;
 let units;
-let data = JSON.parse(localStorage.getItem('data'));
+let data = JSON.parse(localStorage.getItem('data'))
 let inputElement = document.getElementById('search')
 let searchButton = document.getElementById('submit')
 
@@ -95,6 +95,23 @@ const printValues = (data) => {
     cityElement.innerHTML = name
     timeElement.innerHTML = getActualDate()
     weatherElement.innerHTML = capitalize(description)
+
+    setUnits()
+}
+
+const setUnits = () => {
+    let unitsElement = document.getElementById('units')
+    let celsiusElement = document.createElement('span')
+    let fahrenheitElement = document.createElement('span')
+
+    celsiusElement.innerHTML = '°C'
+    celsiusElement.className = 'disabled-unit'
+    fahrenheitElement.innerHTML = '°F'
+    celsiusElement.className = 'disabled-unit'
+
+    unitsElement.appendChild(celsiusElement)
+    unitsElement.insertAdjacentHTML('beforeend', ' | ')
+    unitsElement.appendChild(fahrenheitElement)
 }
 
 inputElement.addEventListener('change', (e) => city = e.target.value)
