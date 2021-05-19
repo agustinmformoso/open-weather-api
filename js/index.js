@@ -1,7 +1,8 @@
 import { API_KEY, URL } from './constants.js'
 
-let city = 'Buenos Aires'
-let units = 'metric'
+let city;
+let units;
+let data = JSON.parse(localStorage.getItem('data'));
 let inputElement = document.getElementById('search')
 let searchButton = document.getElementById('submit')
 
@@ -13,8 +14,17 @@ const getWeather = (city, units) => {
             }
         )
         .then(
-            data => printValues(data)
+            res => {
+                data = res
+                localStorage.setItem('data', JSON.stringify(data))
+                printValues(data)
+            }
         )
+
+}
+
+const getWeatherFromLocalStorage = () => {
+    data && printValues(data)
 }
 
 const capitalize = (string) => {
@@ -47,8 +57,6 @@ const getActualDate = () => {
 }
 
 const printValues = (data) => {
-    console.log(data)
-
     let { clouds, main, name, weather, wind } = data
     let { all } = clouds
     let { feels_like, humidity, pressure, temp, temp_max, temp_min } = main
@@ -95,4 +103,4 @@ searchButton.addEventListener('click', () => {
     getWeather(city, units)
 })
 
-getWeather(city, units)
+getWeatherFromLocalStorage()
