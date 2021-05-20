@@ -19,7 +19,7 @@ p {
     color: var(--primary);
 }
 
-span, .disabled-unit {
+span {
     color: var(--secondary);
 }
 
@@ -45,4 +45,20 @@ span, .disabled-unit {
 #icon {
     background-color: var(--secondary-muted);
     border-radius: 50%;
+}
+
+.active-unit {
+    color: var(--secondary);
+}
+
+.active-unit:hover {
+    cursor: pointer;
+}
+
+.disabled-unit {
+    color: var(--secondary-muted);
+}
+
+.disabled-unit:hover {
+    cursor: pointer;
 }
