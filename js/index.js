@@ -44,7 +44,6 @@ const layout = `
 `
 
 const getWeather = (city, units) => {
-    console.log(city)
     fetch(`${OPENWEATHER_API_URL}weather?q=${city}&appid=${OPENWEATHER_API_KEY}&units=${units}`)
         .then(
             res => {
@@ -195,7 +194,6 @@ inputElement.addEventListener('keyup', (e) => {
 
 searchButton.addEventListener('click', () => {
     city = value;
-    console.log(city);
     (city && city.trim()) && getWeather(city, units);
 })
 
