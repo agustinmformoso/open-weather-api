@@ -13,23 +13,23 @@ const layout = `
             <p id="temperature" class="font-weight-bold h1"></p>
             <p id="feels_like" class="font-weight-bold h1 text-nowrap"></p>
         </div>
-        </div>
+    </div>
 
-        <div class="col-6 col-sm-4 col-md-3 col-lg-3 d-flex flex-column justify-content-center align-items-end">
-        <p id="city" class="m-0 mb-2 h3 font-weight-bold"></p>
+    <div class="col-6 col-sm-4 col-md-3 col-lg-3 d-flex flex-column justify-content-center align-items-end">
+        <p id="city" class="m-0 mb-2 h3 font-weight-bold text-end"></p>
         <span id="time" class="small mb-1 text-nowrap"></span>
         <span id="weather" class="small"></span>
-        </div>
+    </div>
 
-        <div class="col-6 col-sm-4 col-md-3 col-lg-2 d-flex justify-content-start">
+    <div class="col-6 col-sm-4 col-md-3 col-lg-2 d-flex justify-content-start">
         <div class="d-flex align-items-center justify-content-center flex-wrap">
             <img id="icon" />
             <p id="units" class="h5 align-self-center px-2 font-weight-bold text-nowrap"></p>
         </div>
-        </div>
+    </div>
 
-        <div
-        class="col-12 col-sm-12 col-md-3 col-lg-4 mt-4 d-flex justify-content-around align-items-center flex-wrap">
+        
+    <div class="col-12 col-sm-12 col-md-3 col-lg-4 mt-4 d-flex justify-content-around justify-content-md-start justify-content-lg-around  align-items-center  flex-wrap">
         <div class="d-flex flex-column mb-md-3">
             <p id="humidity" class="my-1 small"></p>
             <p id="cloudiness" class="my-1 small"></p>
@@ -44,6 +44,7 @@ const layout = `
 `
 
 const getWeather = (city, units) => {
+    console.log(city)
     fetch(`${OPENWEATHER_API_URL}weather?q=${city}&appid=${OPENWEATHER_API_KEY}&units=${units}`)
         .then(
             res => {
@@ -194,6 +195,7 @@ inputElement.addEventListener('keyup', (e) => {
 
 searchButton.addEventListener('click', () => {
     city = value;
+    console.log(city);
     (city && city.trim()) && getWeather(city, units);
 })
 
