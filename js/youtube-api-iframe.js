@@ -11,13 +11,8 @@ tag.src = 'https://www.youtube.com/iframe_api';
 firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-function setVideo() {
+function setVideo(weather) {
     let video
-    let weather = ''
-
-    if (localStorage.getItem('data')) {
-        weather = JSON.parse(localStorage.getItem('data')).weather[0].description
-    }
 
     switch (weather) {
         case 'moderate rain':
@@ -40,7 +35,6 @@ function setVideo() {
 
 }
 
-// Una vez la API de Iframe está lista...
 function onYouTubeIframeAPIReady() {
     var options = {
         width: '100%',
@@ -52,7 +46,7 @@ function onYouTubeIframeAPIReady() {
             loop: 1,
             controls: 0,
         },
-        // Registro de eventos del reproductor
+
         events: {
             'onReady': onPlayerReady,
         }
@@ -68,10 +62,17 @@ function onPlayerReady(event) {
 }
 
 inputElement.addEventListener('keyup', (e) => {
-    (e.key === 'Enter' && city && city.trim()) && player.loadVideoById(setVideo())
+    if (e.key === 'Enter' && city && e.target.value !== '') {
+        setTimeout(() => {
+            let weather = JSON.parse(localStorage.getItem('data')).weather[0].description;
+            player.loadVideoById(setVideo(weather))
+        }, 1000);
+    }
 })
 
 searchButton.addEventListener('click', (e) => {
-    console.log(setVideo())
-    player.loadVideoById(setVideo())
+    setTimeout(() => {
+        let weather = JSON.parse(localStorage.getItem('data')).weather[0].description;
+        player.loadVideoById(setVideo(weather))
+    }, 1000);
 })

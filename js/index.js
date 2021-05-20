@@ -54,6 +54,7 @@ const getWeather = (city, units) => {
             res => {
                 data = res
                 localStorage.setItem('data', JSON.stringify(data))
+                
                 printValues(data)
             }
         )
