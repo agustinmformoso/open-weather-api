@@ -41,3 +41,8 @@ span, .disabled-unit {
     background-color: var(--primary);
     color: var(--secondary-bg-color);
 }
+
+#icon {
+    background-color: var(--secondary-muted);
+    border-radius: 50%;
+}

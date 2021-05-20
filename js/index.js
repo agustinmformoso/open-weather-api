@@ -1,4 +1,4 @@
-import { API_KEY, URL } from './constants.js'
+import { OPENWEATHER_API_KEY, OPENWEATHER_API_URL } from './constants.js'
 
 let city;
 let units;
@@ -7,7 +7,7 @@ let inputElement = document.getElementById('search')
 let searchButton = document.getElementById('submit')
 
 const getWeather = (city, units) => {
-    fetch(`${URL}weather?q=${city}&appid=${API_KEY}&units=${units}`)
+    fetch(`${OPENWEATHER_API_URL}weather?q=${city}&appid=${OPENWEATHER_API_KEY}&units=${units}`)
         .then(
             res => {
                 return res.json()
@@ -23,7 +23,7 @@ const getWeather = (city, units) => {
 
 }
 
-const getWeatherFromLocalStorage = () => {
+const getWeatherFromLS = () => {
     data && printValues(data)
 }
 
@@ -57,11 +57,11 @@ const getActualDate = () => {
 }
 
 const printValues = (data) => {
-    let { clouds, main, name, weather, wind } = data
-    let { all } = clouds
-    let { feels_like, humidity, pressure, temp, temp_max, temp_min } = main
-    let { description, icon } = weather[0]
-    let { speed } = wind
+    let { clouds, main, name, weather = [], wind } = data || {}
+    let { all } = clouds || {}
+    let { feels_like, humidity, pressure, temp, temp_max, temp_min } = main || {}
+    let { description, icon } = weather[0] || []
+    let { speed } = wind || {}
 
     let iconElement = document.getElementById('icon')
     let temperatureElement = document.getElementById('temperature')
@@ -101,6 +101,7 @@ const printValues = (data) => {
 
 const setUnits = () => {
     let unitsElement = document.getElementById('units')
+    console.log()
     let celsiusElement = document.createElement('span')
     let fahrenheitElement = document.createElement('span')
 
@@ -109,20 +110,20 @@ const setUnits = () => {
     fahrenheitElement.innerHTML = '°F'
     celsiusElement.className = 'disabled-unit'
 
-    unitsElement.appendChild(celsiusElement)
-    unitsElement.insertAdjacentHTML('beforeend', ' | ')
-    unitsElement.appendChild(fahrenheitElement)
+    if (unitsElement.innerHTML === '') {
+        unitsElement.appendChild(celsiusElement)
+        unitsElement.insertAdjacentHTML('beforeend', ' | ')
+        unitsElement.appendChild(fahrenheitElement)
+    }
 }
 
 inputElement.addEventListener('change', (e) => city = e.target.value)
 inputElement.addEventListener('keyup', (e) => {
-    
-    e.key === 'Enter' && getWeather(city, units)
-
+    (e.key === 'Enter' && city && city.trim()) && getWeather(city, units)
 })
 
 searchButton.addEventListener('click', () => {
-    getWeather(city, units)
+    (city && city.trim()) && getWeather(city, units)
 })
 
-getWeatherFromLocalStorage()
+getWeatherFromLS()
